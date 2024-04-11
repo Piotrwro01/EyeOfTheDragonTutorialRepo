@@ -1,3 +1,4 @@
-﻿
-using var game = new EyeOfTheDragon.Game1();
+﻿using EyesOfTheDragon;
+
+using var game = new Game1();
 game.Run();
