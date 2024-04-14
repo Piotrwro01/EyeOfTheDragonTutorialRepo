@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections;
 namespace SharedProject
 {
@@ -13,11 +14,19 @@ namespace SharedProject
         private static KeyboardState keyboardState;
         private static KeyboardState lastKeyboardState;
         private static MouseState mouseState;
+        private static TouchCollection lastTouchLocations;
         private static MouseState lastMouseState;
+        private static TouchCollection touchLocations;
         public static KeyboardState KeyboardState { get { return keyboardState; } }
         public static MouseState MouseState { get { return mouseState; } }
 
-        public static KeyboardState LastKeyboardState { get { return lastKeyboardState; } }
+        public static KeyboardState LastKeyboardState
+        {
+            get
+            {
+                return lastKeyboardState;
+            }
+        }
 
         public static MouseState LastMouseState { get { return lastMouseState; } }
         public static Point MouseAsPoint
@@ -39,6 +48,8 @@ namespace SharedProject
             lastMouseState = mouseState;
             keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
+            lastTouchLocations = touchLocations;
+            touchLocations = TouchPanel.GetState();
             base.Update(gameTime);
         }
         public static bool IsKeyDown(Keys key)
@@ -78,6 +89,7 @@ namespace SharedProject
         public static bool WasMousePressed(MouseButtons button)
         {
             return button switch
+
             {
                 MouseButtons.Left => mouseState.LeftButton == ButtonState.Pressed &&
                 lastMouseState.LeftButton == ButtonState.Released,
@@ -124,6 +136,56 @@ namespace SharedProject
                 }
             }
             return keys;
+        }
+        public static TouchCollection TouchPanelState
+        {
+            get { return touchLocations; }
+        }
+        public static TouchCollection LastTouchPanelState
+        {
+            get { return lastTouchLocations; }
+        }
+        public static bool TouchReleased()
+        {
+            TouchCollection tc = touchLocations;
+            if (tc.Count > 0 &&
+            tc[0].State == TouchLocationState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool TouchPressed()
+        {
+            return (touchLocations.Count > 0 &&
+            (touchLocations[0].State == TouchLocationState.Pressed));
+        }
+        public static bool TouchMoved()
+        {
+            return (touchLocations.Count > 0 &&
+            (touchLocations[0].State == TouchLocationState.Moved));
+        }
+        public static Vector2 TouchLocation
+        {
+            get
+            {
+                Vector2 result = Vector2.Zero - Vector2.One;
+                if (touchLocations.Count > 0)
+                {
+                    if (touchLocations[0].State == TouchLocationState.Pressed ||
+                    touchLocations[0].State == TouchLocationState.Moved)
+                    {
+                        result = touchLocations[0].Position;
+                    }
+                }
+                return result;
+            }
+        }
+        public static bool WasKeyPressed()
+        {
+            return
+            keyboardState.GetPressedKeyCount() > 0 &&
+            lastKeyboardState.GetPressedKeyCount() == 0;
         }
     }
 }

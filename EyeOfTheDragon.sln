@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EyeOfTheDragon", "EyeOfTheDragon\EyeOfTheDragon.csproj", "{6BD40C1B-F285-4A49-87F6-91B5DE877022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgLibrary", "RpgLibrary\RpgLibrary.csproj", "{C0C0AD4E-F11E-4B96-8CB2-154E8F71F876}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgLibrary", "RpgLibrary\RpgLibrary.csproj", "{C0C0AD4E-F11E-4B96-8CB2-154E8F71F876}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedProject", "SharedProject\SharedProject.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyesOfTheDragonAndroid", "EyesOfTheDragonAndroid\EyesOfTheDragonAndroid.csproj", "{5C1FF31B-7136-41E7-B659-1D209FAFB1E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{C0C0AD4E-F11E-4B96-8CB2-154E8F71F876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0C0AD4E-F11E-4B96-8CB2-154E8F71F876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C0AD4E-F11E-4B96-8CB2-154E8F71F876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1FF31B-7136-41E7-B659-1D209FAFB1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1FF31B-7136-41E7-B659-1D209FAFB1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1FF31B-7136-41E7-B659-1D209FAFB1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1FF31B-7136-41E7-B659-1D209FAFB1E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -31,6 +37,7 @@ Global
 		SolutionGuid = {28784B1D-D189-4B76-97D4-B6F998B3DCD1}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedProject\SharedProject.projitems*{5c1ff31b-7136-41e7-b659-1d209fafb1e5}*SharedItemsImports = 5
 		SharedProject\SharedProject.projitems*{6bd40c1b-f285-4a49-87f6-91b5de877022}*SharedItemsImports = 5
 		SharedProject\SharedProject.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 	EndGlobalSection

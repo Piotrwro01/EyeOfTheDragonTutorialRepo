@@ -1,43 +1,54 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Android.Views;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using SharedProject;
 using SharedProject.GameScreens;
-
-
-namespace EyesOfTheDragon
+using SharedProject.GamesScreens;
+namespace EyesOfTheDragonAndroid
 {
-    public class Game1 : Game
+    public class Android : Game
     {
-        private readonly TitleState _titleState;
-        private readonly GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         public GameStateManager GameStateManager { get; private set; }
-        public Game1()
+        public ITitleState TitleState { get; private set; }
+        public IStartMenuState StartMenuState { get; private set; }
+        public IGamePlayState GamePlayState { get; private set; }
+        public Android()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _graphics.PreferredBackBufferWidth = Settings.BaseWidth;
-            _graphics.PreferredBackBufferHeight = Settings.BaseHeight;
-            _graphics.ApplyChanges();
             Components.Add(new Xin(this));
             GameStateManager = new GameStateManager(this);
             Components.Add(GameStateManager);
             Services.AddService(typeof(GameStateManager), GameStateManager);
-            _titleState = new(this);
+            TitleState = new TitleState(this);
+            StartMenuState = new StartMenuState(this);
+            GamePlayState = new GamePlayState(this);
         }
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Settings.TargetHeight = _graphics.PreferredBackBufferHeight;
+            Settings.TargetWidth = _graphics.PreferredBackBufferWidth;
             base.Initialize();
         }
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), _spriteBatch);
-            GameStateManager.PushState(_titleState);
+            GameStateManager.PushState((TitleState)TitleState);
+        }
+        protected void FixedUpdate()
+        {
+
+            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
+            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+            _graphics.ApplyChanges();
         }
         protected override void Update(GameTime gameTime)
         {

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharedProject.Controls;
 namespace SharedProject
 {
     public abstract partial class GameState : DrawableGameComponent
     {
         #region Fields and Properties
+        protected ControlManager controls;
         private readonly List<GameComponent> childComponents;
         protected SpriteBatch SpriteBatch { get; set; }
+        public ControlManager ControlManager { get { return controls; } }
         public List<GameComponent> Components
         {
             get { return childComponents; }
@@ -24,9 +27,7 @@ namespace SharedProject
         public GameState(Game game)
         : base(game)
         {
-            StateManager = Game.Services.GetService<GameStateManager>();
             childComponents = new List<GameComponent>();
-            SpriteBatch = Game.Services.GetService<SpriteBatch>();
             tag = this;
         }
         #endregion
@@ -35,6 +36,12 @@ namespace SharedProject
         {
             base.Initialize();
         }
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+            SpriteBatch = Game.Services.GetService<SpriteBatch>();
+            controls = new(Game.Content.Load<SpriteFont>(@"Fonts/ControlFont"));
+        }
         public override void Update(GameTime gameTime)
         {
             foreach (GameComponent component in childComponents)
@@ -42,6 +49,7 @@ namespace SharedProject
                 if (component.Enabled)
                     component.Update(gameTime);
             }
+            ControlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -56,6 +64,7 @@ namespace SharedProject
                         drawComponent.Draw(gameTime);
                 }
             }
+            ControlManager.Draw(SpriteBatch);
             base.Draw(gameTime);
         }
         #endregion

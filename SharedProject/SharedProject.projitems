@@ -16,10 +16,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ControlManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Label.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\LinkLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameScreens\GamePlayState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameScreens\IGamePlayState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameScreens\StartMenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameScreens\TitleState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStateManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpriteClasses\AnimatedSprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpriteClasses\Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpriteClasses\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Xin.cs" />
   </ItemGroup>
   <ItemGroup>
